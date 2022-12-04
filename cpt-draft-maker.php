@@ -234,7 +234,7 @@ foreach($press_posts as $single_post){
 	
 } 
 
-// Instantiate Referral Replace Content.
+
 new CPT_DRAFT_MAKER();
 
 function myprefix_get_theme_option( $id = '' ) {
