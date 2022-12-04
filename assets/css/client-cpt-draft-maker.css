@@ -1,0 +1,81 @@
+.dialog_style1{
+	border-color: black;
+	border-style: solid;
+	border-width:4px;
+	background-color: black;
+}
+
+
+
+.ui-widget {
+    font-family: Verdana,Arial,sans-serif;
+    font-size: 1.0em;
+}
+.ui-widget-content {
+    background: white;
+  /*Change the dialog border color here*/
+    border: 0px solid black;
+    color: black;
+}
+
+.ui-dialog {
+    left: 0;
+    outline: 0 none;
+    padding: 0 !important;
+    position: absolute;
+    top: 0;
+}
+
+#success {
+    padding: 0;
+    margin: 0; 
+}
+
+.ui-dialog .ui-dialog-content {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    overflow: auto;
+    position: relative;
+    padding: 0 !important;
+}
+
+.ui-widget-header {
+  /*Change the Header color here*/
+    background: black;
+    border-color:black;
+    border:10;
+    color: #fff;
+    
+}
+
+.ui-dialog .ui-dialog-titlebar {
+    padding: 0.1em .5em;
+    position: relative;
+        font-size: 1em;
+    background-color: black;    
+}
+
+.siva_plugin_dialog{
+
+	text-align:center;
+	vertical-align: middle;
+	padding:5px;
+}
+
+
+.ui-button {
+    outline: none;
+    border: 3px solid black !important;
+    border-radius: 4px !important;
+    color:black;
+    background: black;
+    background-color: black;
+}
+
+.ui-button-text{
+	color:black;
+}
+
+.ui-icon{
+	color:black;
+}
