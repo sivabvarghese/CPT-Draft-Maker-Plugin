@@ -147,6 +147,19 @@ public static function add_admin_menu() {
 }
 
 public static function make_draft(){
+	$post_args = array('post_type' => CPT_NAME,'post_status' => array('publish', 'draft') ,'numberposts' => -1);
+	$all_posts = get_posts($post_args); 
+	foreach($all_posts as $apost){
+		$value = self::get_theme_option( $apost->post_title );
+		if($value=='on'){
+			$post = array( 'ID' => $apost->ID, 'post_status' => 'draft' );
+			wp_update_post($post);
+		}
+		else{
+			$post = array( 'ID' => $apost->ID, 'post_status' => 'publish' );
+			wp_update_post($post);
+		}
+	}
 	$post_args_published = array('post_type' => CPT_NAME,'post_status' => 'publish');
 	$post_args_drafts = array('post_type' => CPT_NAME,'post_status' => 'draft');
     $pub_posts = get_posts($post_args_published); 
@@ -181,13 +194,20 @@ public static function make_draft(){
 		<form method="post" action="options.php">
 
 			<?php settings_fields( 'theme_options' ); ?>
+			<img src="<?php echo CPT_DRAFT_MAKER_ASSETS_URL . 'images/siva.png'?>" style="width:60px;height:60px;border-style:solid;border-width:1px;border-color:black;border-radius:15px;" />
 			<h4><b>Check Field And Save To Draft and Publish</b></h4>
-			<input type="text" id="search" placeholder="Search CPT Listings"/>
-			<table class="form-table wpex-custom-admin-login-table">
+			<div>
+			<input type="text" id="search" placeholder="Search CPT Listings" style="margin-bottom:-5em;"/>
+ </div>
+
+			<table class="form-table wpex-custom-admin-login-table table-cpt" style="margin-top:-3%;">
+			<tr>
+				<th id="table_head">CPT Title</th>
+				<th id="table_head">Set As Draft</th>
+			</tr>
             <?php
 
-$post_args = array('post_type' => CPT_NAME,
-'post_status' => array('publish', 'pending', 'draft', 'auto-draft', 'future', 'private', 'inherit', 'trash')    );
+$post_args = array('post_type' => CPT_NAME,'post_status' => array('publish', 'draft'),'numberposts' => -1);
 $press_posts = get_posts($post_args);   
 
 if(!empty($press_posts)){
@@ -195,8 +215,9 @@ foreach($press_posts as $single_post){
     ?>
     <br><?php
 // Checkbox example ?>
-<tr valign="top" id="<?php echo $single_post->post_title ?>">
-	<th scope="row"><?php esc_html_e( $single_post->post_title, CPT_key); ?></th>
+
+<tr valign="top" id="<?php echo $single_post->post_title ?>"  class="rows_cpt">
+	<th scope="row"><?php esc_html_e( $single_post->post_title, CPT_key); ?> </th>
 	<td>
 		<?php $value = self::get_theme_option( $single_post->post_title ); ?>
 		<input type="checkbox" name="<?php echo "theme_options[" . $single_post->post_title ."]"; ?>" <?php checked( $value, 'on' ); ?>> <?php esc_html_e($single_post->post_title , CPT_key); ?>
@@ -214,7 +235,7 @@ foreach($press_posts as $single_post){
 			 
 
 			</table>
-
+		
 
 			
 			<?php submit_button(); ?>
