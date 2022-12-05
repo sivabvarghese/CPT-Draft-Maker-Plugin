@@ -182,6 +182,7 @@ public static function make_draft(){
 
 			<?php settings_fields( 'theme_options' ); ?>
 			<h4><b>Check Field And Save To Draft and Publish</b></h4>
+			<input type="text" id="search" placeholder="Search CPT Listings"/>
 			<table class="form-table wpex-custom-admin-login-table">
             <?php
 
@@ -194,7 +195,7 @@ foreach($press_posts as $single_post){
     ?>
     <br><?php
 // Checkbox example ?>
-<tr valign="top">
+<tr valign="top" id="<?php echo $single_post->post_title ?>">
 	<th scope="row"><?php esc_html_e( $single_post->post_title, CPT_key); ?></th>
 	<td>
 		<?php $value = self::get_theme_option( $single_post->post_title ); ?>
@@ -233,7 +234,6 @@ foreach($press_posts as $single_post){
 	
 	
 } 
-
 
 new CPT_DRAFT_MAKER();
 
